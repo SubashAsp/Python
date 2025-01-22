@@ -75,4 +75,18 @@ g.remove(100,64)
 print(g)
 can pass only one argument
 """
+#pop
+h = [1, 2, 3, 4, 5]
+h.pop(1)
+print(h)
 
+#clear
+h.clear()
+print(h)
+
+#index
+i = [1, 2, 3, 4, 5]
+print("index value : ", i.index(5))
+#--index for string
+j = "Subash"
+print(j.index("u"))
