@@ -1,0 +1,79 @@
+print("dictionary")
+
+#creating a dictionary
+dict1 = {
+    'subash': 12558,
+    'karthi': 12559,
+    'deepan': 12560
+}
+print(dict1)
+
+# accessing through name
+print(dict1['subash'])
+
+#through get()
+print(dict1.get('karthi'))
+
+# deleting the value
+del dict1['deepan']
+print(dict1)
+
+# addng new value
+dict1['suganth'] = 12561
+print(dict1)
+
+#getting keys -- using list()
+a = list(dict1)   # gets only keys
+print(a) 
+
+#using keys()
+print(dict1.keys())
+
+#getting values
+print(dict1.values())
+
+#get items()
+print(dict1.items())  #returns as tuples in list
+
+#sorting 
+b = sorted(dict1)  #sorting keys in alphabetic order
+print(b)
+
+#chainging values
+dict1['karthi'] = 562
+print(dict1)
+
+#updating / adding new values
+dict1.update({'suganth': 563})
+print(dict1)
+dict1.update({'logu': 564})
+print(dict1)
+
+#removing
+#pop() -- removes specified item
+dict1.pop('logu')
+print(dict1)
+
+#popitem() -- removes last item
+dict1.popitem()
+print(dict1)
+
+#deletng specified key name
+del dict1["karthi"]
+print(dict1)
+
+# #deleting whole dictionary
+# del dict1
+# print(dict1)
+
+# using dict() constructor
+c = dict([('subash', 558), ('karthi', 559), ('deepan', 560), ('suganth', 561)])
+print(c)
+
+#or
+d = dict(subash=558, karthi=559, deepan=560, suganth=561)
+print(d)
+
+#using expression
+e = dict({x: x**2 for x in range(5)})  #comperhension
+print(e)
