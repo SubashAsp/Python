@@ -156,3 +156,41 @@ print(fil_animals)
 fil_animals1 = [animal.title() for animal in animals]
 print(fil_animals1)
 
+#using in nested for
+num = [1, 2, 3]
+number = []
+for x in num:
+    for y in num:
+        if x != y:
+            number.append([x,y])
+print(number)
+
+#using comperhension
+numbers = [[x, y] for x in num for y in num if x != y]
+print(numbers)
+
+#Nested list comperhension
+matrix = [
+    [1, 2, 3, 4],
+    [2, 4, 6, 8],
+    [3, 6, 9, 12]
+]
+transpose = []
+for i in range(4):
+    transpose.append([row[i] for row in matrix])
+print(transpose)
+
+#or
+transposed = []
+for i in range (4):
+    transposed_row = []  #temp list
+    for row in matrix:
+        transposed_row.append(row[i])
+    transposed.append(transposed_row)
+
+print(transposed)
+
+#or using comperhension
+transpose1 = [[row[i] for row in matrix]for i in range(4)]
+
+print(transpose1)
