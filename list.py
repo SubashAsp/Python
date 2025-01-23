@@ -1,3 +1,5 @@
+from collections import deque
+
 print("List\n")
 #creating list
 a = [1, 2, 3]
@@ -90,3 +92,23 @@ print("index value : ", i.index(5))
 #--index for string
 j = "Subash"
 print(j.index("u"))
+
+#using list as stack
+stack = [1, 2, 3, 4, 5]
+stack.append(6)
+stack.append(7)
+print(stack)
+print(stack.pop())
+print(stack.pop())  #in stack first come last out / last come first out
+
+#using list as queues
+queues = deque(["subash", "karthi", "deepan","logu"])  #deque is designed to have fast appends and pop
+queues.append("suganth")
+queues.append("rishi")
+print(queues)
+print(queues.popleft())
+print(queues.popleft())  #in queues first come first out
+print(queues)
+
+#list comprehensions
+cube = []
