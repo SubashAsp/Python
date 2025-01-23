@@ -110,5 +110,8 @@ print(queues.popleft())
 print(queues.popleft())  #in queues first come first out
 print(queues)
 
-#list comprehensions
+#list comprehensions -- provide concise way of writing code
 cube = []
+for x in range(20):
+    cube.append(x**3)
+print(cube)
