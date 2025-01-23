@@ -111,7 +111,48 @@ print(queues.popleft())  #in queues first come first out
 print(queues)
 
 #list comprehensions -- provide concise way of writing code
+#working with new new list / traditional method
 cube = []
 for x in range(20):
     cube.append(x**3)
 print(cube)
+
+#using list comprehension
+cube1 = [y**3 for y in range(10)]
+print(cube1)
+
+#working with existing list
+names = ["Subash", "Karthi", "Suresh", "Prasad", "Suganth", "Akash"]
+lst = []
+for name in names:
+    if 'S' in name:
+        lst.append(name)
+
+print(lst)
+
+#using list comprehension
+#syntax list = [expression for item in iterable if condition == True]
+lst_names = [name for name in names if 'S' in name]
+print(lst_names)
+
+#copying
+names_copy = []
+for name in names:
+    names_copy.append(name)
+print(names_copy)
+
+# copying in list comperhension
+names_copy1 = [name for name in names]
+print(names_copy1)
+
+#exercise from online
+animals = ["lion", "tiger", "monkey", "elephant", "frog"]
+fil_animals = []
+for animal in animals:
+    fil_animals.append(animal.title())
+print(fil_animals)
+
+#using list comprehension
+fil_animals1 = [animal.title() for animal in animals]
+print(fil_animals1)
+
