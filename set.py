@@ -14,8 +14,16 @@ print(len(b))
 print('apple' in b)
 print('subash' in b)
 
-#set operatipns
+#set operations
 c = set('abracadabra')
 d = set('alacazam')
 print(c)
 print(d)
+print(c - d)  #letters in c but not in d
+print(c | d)  #OR---in c or d or both
+print(c & d)  #AND--in both c and d
+print(c ^ d)  #NOR--in a or b but not both
+
+#comperhension in set 
+e = {x for x in 'abracadabra' if x not in 'abc'}
+print(e)
