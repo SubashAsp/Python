@@ -77,3 +77,28 @@ print(d)
 #using expression
 e = dict({x: x**2 for x in range(5)})  #comperhension
 print(e)
+
+#looping through dictionary
+hero = {
+    'loki': 'the best',
+    "steve": 'the pure',
+    'tony': 'the smart',
+    'thor': 'the strong'
+}
+for k, v in hero.items():
+    print(k,v)
+
+#enumerate -- return postion index and corresponding value
+for i, v in enumerate(hero):
+    print(i, v)
+
+#zip -- to loop with two or more sequences
+questions = ['name', 'city', 'fav color']
+answers = ['subash', 'erode', 'blue']
+for q, a in zip(questions, answers):
+    print('What is your {0}? It is {1}'.format(q, a))
+
+#reversed() -- to loop over a sequence in reverse
+for i in reversed(range(1, 10, 2)):
+    print(i)
+
