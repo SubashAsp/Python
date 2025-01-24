@@ -47,3 +47,86 @@ def default_fun(name= 'subash'):
 
 default_fun()  # no argu
 default_fun('karthi')  #has argu
+
+# using number
+i = 5
+def f(arg=i):
+    print(arg)
+    
+i = 6
+f()
+
+# passing a list as argument
+def list_fun(name):
+    for x in name:
+        print(x)
+
+animal = ['lion', 'tiger', 'liger']
+list_fun(animal)
+
+#returning
+# sharing same default bwt subsequent calls
+def f(a, l = []):
+    l.append(a)
+    return l
+print(f(1))
+print(f(2))
+print(f(3))
+
+print()
+
+# to avoid sharing of default bwt subsequent calls
+def f1(a, L = None):
+    if L is None:
+        L = []
+    L.append(a)
+    return L
+
+print(f1(1))
+print(f1(2))
+print(f1(3))
+
+print()
+
+# Positional only arguments
+# to pass positional only arguments
+def f2(p, /):
+    print(p)
+
+f2(3)
+
+# how not to call positional only argument
+# def f3(q, /):
+#     print(q)
+
+# f3(x = 3)
+# key value pair cannot be passed in positional only argument
+
+print()
+
+# keyword only aruguments
+def my_function(*, x):
+  print(x)
+
+my_function(x = 3)
+
+# how not to call keyword only aruguments
+# def my_function(*, x):
+#   print(x)
+
+# my_function(3) 
+
+#Combine Positional-Only and Keyword-Only
+def my_function(a, b, /, *, c, d):
+  print(a + b + c + d)
+
+my_function(5, 6, c = 7, d = 8) 
+
+#lambda expression
+def make_incrementor(n):
+    return lambda x: x + n
+
+fun = make_incrementor(42)
+print(fun(0))
+
+#
