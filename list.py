@@ -82,6 +82,12 @@ h = [1, 2, 3, 4, 5]
 h.pop(1)
 print(h)
 
+#pop() -- using index value
+h1 = [1, 2, 3, 4, 5]
+print("index value to pop : ",h1.index(4))
+h1.pop(3)
+print(h1)
+
 #clear
 h.clear()
 print(h)
