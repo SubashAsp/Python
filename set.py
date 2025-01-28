@@ -93,3 +93,9 @@ print("Updating a set with a tuple : ", set4)
 set5 = {1, 2, 3, 4, 5}
 set5.update(('suubash',))
 print(set5)
+
+# clear() method 
+# it completely clear the values leaving only the set
+clr_set = {1, 2, 3, 4, 5}
+clr_set.clear()
+print("Clear() method : ", clr_set)
