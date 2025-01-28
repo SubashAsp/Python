@@ -61,3 +61,35 @@ add_set4 = (5)
 add_set3.add(add_set4)
 print("Adding immutable object to a set : ", add_set3)
 
+# update() method in set
+
+# update method only update iterable objects (like, list, tuple)
+# up_set = {1, 2, 3, 4}
+# up_set.update(5)
+# print(up_set)
+
+# updating a set with another set
+upd_set = {1, 2, 3, 4}
+set1 = {3, 4, 5}
+upd_set.update(set1)
+print("Updating the set with another set : ", upd_set)
+
+# updating a set with list
+set2 = {1, 2, 3, 4, 5}
+lst = ['subash']
+set2.update(lst)
+print("Updating a set with list : ", set2)
+
+set3 = {1, 2, 3, 4, 5}
+set3.update(['subash'])
+print("Updating a set by passing a list : ", set3)
+
+#updating a seet with a tuple
+set4 = {1, 2, 3, 4}
+tup = ('subash')   #not giving the followwing comma can lead to first converting it into tuple and then updating it to set
+set4.update(tup)
+print("Updating a set with a tuple : ", set4)   
+
+set5 = {1, 2, 3, 4, 5}
+set5.update(('suubash',))
+print(set5)
