@@ -15,3 +15,5 @@ greet2 = second_class()
 
 new_class.state(greet)  #  method to call function  inside a class
 greet.state()  # calling using a class object 
+
+# greet2.state()  // you cannot call a method in a class with different class object
