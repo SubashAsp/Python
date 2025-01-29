@@ -29,3 +29,24 @@ num = new_cls()
 
 # print(x)
 # we cannot call a variable that iss defined inside a method outside directly
+
+# Attributes
+# class attributes
+class Bike:
+    wheels = 2  # Class attribute
+
+    def __init__(self, brand, model):
+        self.brand = brand  # Instance attribute
+        self.model = model  # Instance attribute
+
+# Create instances of the Car class
+bike1 = Bike("Hero", "Splendor")
+bike2 = Bike("Honda", "Shine")
+
+# Accessing class attribute
+print(bike1.wheels) 
+print(bike2.wheels)  
+
+# Accessing instance attributes
+print(bike1.brand)  
+print(bike2.model)  
