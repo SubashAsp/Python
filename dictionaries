@@ -11,8 +11,21 @@ print(dict1)
 # accessing through name
 print(dict1['subash'])
 
+# accessing a key not in a dictionary
+# print(dict1['suresh'])
+# it throws an error
+
 #through get()
 print(dict1.get('karthi'))
+
+# get method returns nothing if the value is not present (not even error)
+print(dict1.get('suresh'))
+
+# we can give a message in grt method if the value is not present
+print(dict1.get('suresh', 'not found'))
+
+# it does not apply iif the value is present
+print(dict1.get('subash', 'not found'))
 
 # deleting the value
 del dict1['deepan']
@@ -102,3 +115,13 @@ for q, a in zip(questions, answers):
 for i in reversed(range(1, 10, 2)):
     print(i)
 
+# creating a dictionary from list
+key = [1, 2, 3, 4]
+value = ['subash', 'karthi', 'suganth', 'suresh']
+data = dict(zip(key,value))
+print(data)
+
+keys = [1, 2, 3]
+values = ['subash','karthi']
+data1 = dict(zip(keys, values))
+print(data1)  #  zip function stops when it can't pair and ommit 
