@@ -104,3 +104,5 @@ print("Clear() method : ", clr_set)
 dis_set = {1, 2, 3, 4, 5}
 dis_set.discard(2)
 print(dis_set)
+
+#

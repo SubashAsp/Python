@@ -129,4 +129,10 @@ def make_incrementor(n):
 fun = make_incrementor(42)
 print(fun(0))
 
-#
+#document string / documentation
+def my_function():
+    """Do nothing, but document it.
+    """
+    pass
+
+print("Document String : ", my_function.__doc__)
