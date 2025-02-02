@@ -136,3 +136,13 @@ def my_function():
     pass
 
 print("Document String : ", my_function.__doc__)
+
+# unpacking a tuple or list 
+def unpacking_function(name, age, city):
+    print(f"Hi, {name}! Your age is {age} and from {city}")
+
+detail = ("Subash", 22, "India")
+unpacking_function(*detail)
+
+details = ["Subash", 22, "India"]
+unpacking_function(*details)
