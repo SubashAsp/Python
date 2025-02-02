@@ -155,3 +155,11 @@ default_function()
 default_function("Karthi")
 default_function("Karthi", 23)
 default_function("Karthi", 23, "Chennai")
+
+print("Packing Arguments :")
+# packing arguments 
+def packng_functio(*detail):
+    for i in detail:
+        print(f"Hi {i}")
+
+packng_functio("Subash", "Karthi", "Deepan")
