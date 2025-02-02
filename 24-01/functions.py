@@ -138,11 +138,20 @@ def my_function():
 print("Document String : ", my_function.__doc__)
 
 # unpacking a tuple or list 
-def unpacking_function(name, age, city):
-    print(f"Hi, {name}! Your age is {age} and from {city}")
+def unpacking_function(name, age, country):
+    print(f"Hi, {name}! Your age is {age} and from {country}")
 
 detail = ("Subash", 22, "India")
 unpacking_function(*detail)
 
 details = ["Subash", 22, "India"]
 unpacking_function(*details)
+
+#  using default parameter
+def default_function(name= "Subash", age= 22, city = "Erode"):
+    print(f"Hi, {name}! Your age is {age} and from {city}")
+
+default_function()
+default_function("Karthi")
+default_function("Karthi", 23)
+default_function("Karthi", 23, "Chennai")
