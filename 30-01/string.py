@@ -1,4 +1,4 @@
-
+import roman
 
 print('\nString\n')
 
@@ -142,7 +142,7 @@ numeric_str = "12345"
 print(numeric_str.isnumeric())
 
 numeric_str1 = "XII"
-print(numeric_str1.isnumeric())
+print("numeric : ", numeric_str1.isnumeric())
 
 numeric_str1 = "1.23"
 print(numeric_str1.isnumeric())
@@ -191,4 +191,8 @@ print(fill_str.zfill(7))
 fill_str1 = "hi"
 print(fill_str1.zfill(7))
 
-# 
+# Convert integer to Roman numeral
+print(roman.toRoman(1999)) 
+number_str = 1999
+roman_str = roman.toRoman(number_str)
+print(roman_str)
