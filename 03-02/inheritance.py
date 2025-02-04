@@ -32,11 +32,13 @@ print(child.mom_wisdom())
 print("Multilevel Inheritance : ")
 
 # multilevel inheritance -- inherit from parent class which itself is a child for another parent class
-class Owner:
-    def own_salary(self):
-        return "Owner Salary : "
+class Person:
+    def detail(self, name, age):
+        self.name = name
+        self.age = age
     
-# class manager
+# class Employee(Person):
+    
 
 # hierarchical inheritance
 class College:
