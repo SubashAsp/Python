@@ -33,12 +33,29 @@ print("Multilevel Inheritance : ")
 
 # multilevel inheritance -- inherit from parent class which itself is a child for another parent class
 class Person:
-    def detail(self, name, age):
+    def person_detail(self, name, age):
         self.name = name
         self.age = age
+        print(f"Name : {self.name}")
+        print(f"Age : {self.age}")
     
-# class Employee(Person):
-    
+class Employee(Person):
+    def employee_detail(self, name, age, employee_id):
+        self.person_detail(name, age)
+        self.employee_id = employee_id
+        print(f"Employee_Id : {self.employee_id}")
+
+class Manager(Employee):
+    def manager_detail(self, name, age, employee_id, department):
+            self.employee_detail(name, age, employee_id)
+            self.department = department
+            print(f"Department : {self.department}")
+
+manager = Manager()
+manager.manager_detail("Karthi", 40, 12558, "Python")
+
+employee = Employee()
+manager.employee_detail("karthi", 40, 12558)
 
 # hierarchical inheritance
 class College:
