@@ -41,3 +41,17 @@ print('Iterators : ')
 
 # for i in values:
 #     print(i)
+
+
+# generators
+
+def numbers():
+    n = 1
+    while n <= 10:
+        num = n * n
+        yield num  # generator
+        n += 1
+
+square = numbers()
+for i in square:
+    print(i)
