@@ -13,3 +13,10 @@ print(div(200, 10))
 
 div1 = lambda x,y:x//y
 print(div1(200, 10))
+
+# immediately called function
+print((lambda a,b:a+b)(2, 3))
+
+# higher order function
+hof = lambda x, func: x+func(x)
+print(hof(2, lambda x:x*x))
