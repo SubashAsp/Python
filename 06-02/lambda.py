@@ -20,3 +20,12 @@ print((lambda a,b:a+b)(2, 3))
 # higher order function
 hof = lambda x, func: x+func(x)
 print(hof(2, lambda x:x*x))
+
+# traceback
+# s = lambda x:x/0
+# s(3)
+
+# filter()
+number = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+filt = list(filter(lambda x:x%2==0, number))
+print(filt)
