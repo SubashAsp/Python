@@ -1,3 +1,5 @@
+from functools import reduce
+
 # adding numbers using lambda functions
 add = lambda x,y:x+y
 print(add(23,7))
@@ -33,3 +35,16 @@ print(filt)
 names = ['subash', 'suba', 'karthi', 'kar']
 filter1 = list(filter(lambda x:len(x)>4, names))
 print(filter1)
+
+numbers = list()
+numbers=[x for x in range(1,11)]
+print(numbers)
+# filter
+even = list(filter(lambda x:x%2==0, numbers))
+print(even)
+# map()
+mapping = list(map(lambda x:x**2, even))
+print(mapping)
+# reduce
+reducing = reduce(lambda x, y:x+y, mapping)
+print(reducing)
