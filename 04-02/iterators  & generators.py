@@ -55,3 +55,17 @@ def numbers():
 square = numbers()
 for i in square:
     print(i)
+
+# normal list comprehension
+list_com = [x**2 for x in range(1, 6)]
+print("list comprehension for square : ", list_com)
+
+# using generator comprehension
+gen_com = (x**2 for x in range(1, 6))
+print(gen_com)
+
+# to print generatoe comprehension using next() and for loop
+print(next(gen_com))
+
+for x in gen_com:
+    print(x)
