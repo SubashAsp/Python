@@ -35,7 +35,25 @@ class Person:
         self.name = name  
         self.age = age    
     def display_info(self):  
-        print(f"Name: {self.name}, Age: {self.age}")
+        print(f"Name:{self.name}, Age:{self.age}")
         
-person = Person("Alice", 25)
+person = Person("Subash", 22)
 person.display_info()
+
+# private method
+class Detail:
+    def __init__(self, name, degree):
+        self.__name = name
+        self.__degree = degree
+    def display_info(self):
+        print(f"Name: {self.__name}, Age: {self.__degree}")
+    def get_name(self):
+        return self.__name
+    def set_name(self, name):
+        self.__name = name
+
+person = Detail("Subash", "IT")
+print(person.get_name())
+person.set_name("Suresh")
+print(person.get_name())
+
