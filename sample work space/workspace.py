@@ -30,30 +30,40 @@
 # num.new_func(20)
 
 # public method
-class Person:
-    def __init__(self, name, age):
-        self.name = name  
-        self.age = age    
-    def display_info(self):  
-        print(f"Name:{self.name}, Age:{self.age}")
+# class Person:
+#     def __init__(self, name, age):
+#         self.name = name  
+#         self.age = age    
+#     def display_info(self):  
+#         print(f"Name:{self.name}, Age:{self.age}")
         
-person = Person("Subash", 22)
-person.display_info()
+# person = Person("Subash", 22)
+# person.display_info()
 
-# private method
-class Detail:
-    def __init__(self, name, degree):
-        self.__name = name
-        self.__degree = degree
-    def display_info(self):
-        print(f"Name: {self.__name}, Degree: {self.__degree}")
-    def get_name(self):
-        return self.__name
-    def set_name(self, name):
-        self.__name = name
+# # private method
+# class Detail:
+#     def __init__(self, name, degree):
+#         self.__name = name
+#         self.__degree = degree
+#     def display_info(self):
+#         print(f"Name: {self.__name}, Degree: {self.__degree}")
+#     def get_name(self):
+#         return self.__name
+#     def set_name(self, name):
+#         self.__name = name
 
-person = Detail("Subash", "IT")
-print(person.get_name())
-person.set_name("Suresh")
-print(person.get_name())
+# person = Detail("Subash", "IT")
+# print(person.get_name())
+# person.set_name("Suresh")
+# print(person.get_name())
+
+class Private_cls:
+    def __init__(self):
+        self.__name = "Subash"
+    def user_name(self):
+        print(self.__name)    
+
+detail=Private_cls()
+detail.name="karthi"
+detail.user_name()
 
