@@ -1,3 +1,6 @@
+import math
+import random
+
 # # defining a class
 # class My_Class:
 #     def my_function(a, b):
@@ -57,13 +60,62 @@
 # person.set_name("Suresh")
 # print(person.get_name())
 
-class Private_cls:
-    def __init__(self):
-        self.__name = "Subash"
-    def user_name(self):
-        print(self.__name)    
+# class Private_cls:
+#     def __init__(self):
+#         self.__name = "Subash"
+#     def user_name(self):
+#         print(self.__name)    
 
-detail=Private_cls()
-detail.name="karthi"
-detail.user_name()
+# detail=Private_cls()
+# detail.name="karthi"
+# detail.user_name()
 
+
+# random number guess
+# secert_number = random.randint(1, 10)
+# print(secert_number)
+# guess_count = 0
+# guess_limit = 3
+# guess_left = 3
+# while guess_count < guess_limit:
+#         try:
+#             guess = int(input("Guess: "))
+#             guess_count += 1
+#             if guess == secert_number :
+#                 print('You won!')
+#                 break
+#             else:
+#                 guess_left -= 1
+#                 print("Guess left : ", guess_left)
+#         except(ValueError):
+#             print("Enter an integer.")
+# else:
+#     print('Sorry, you failed!')
+
+# car game
+start_count = 0
+stop_count = 0
+while True:
+    command = input("Enter the command : ").lower()
+    if command == "start":
+        if start_count == 0:
+            print("Car started. Get ready.")
+            start_count = start_count + 1
+        else:
+            print("The car is already started.")
+    elif command == "stop":
+        if stop_count == 0:
+            print("Car stopped.")
+            stop_count = stop_count + 1
+        else:
+            print("The car is already stopped.")
+    elif command == "help":
+        print("""
+start - to start the car.
+stop - to stop the car.
+quit - to quit.
+        """)
+    elif command == "quit":
+        break
+    else:
+        print("Please enter 'help' for assitance.")
