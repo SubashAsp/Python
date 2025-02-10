@@ -152,9 +152,12 @@ import _mysql_connector
 # area = area_of_recatangle(l, b)
 # print("Area of the rectangle :", area)
 
-# recursive function
-def sum(n):
-    if n == 1:
-        return 1
-    return n + sum(n-1)
-print(sum(5))
+# # recursive function
+# def sum(n):
+    # #Base case
+#     if n == 1:
+#         return 1
+    # #Recursive case
+#     return n + sum(n-1)
+# print(sum(5))
+
