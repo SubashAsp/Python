@@ -1,5 +1,6 @@
 import math
 import random
+import my
 
 # # defining a class
 # class My_Class:
@@ -92,30 +93,38 @@ import random
 # else:
 #     print('Sorry, you failed!')
 
-# car game
-start_count = 0
-stop_count = 0
-while True:
-    command = input("Enter the command : ").lower()
-    if command == "start":
-        if start_count == 0:
-            print("Car started. Get ready.")
-            start_count = start_count + 1
-        else:
-            print("The car is already started.")
-    elif command == "stop":
-        if stop_count == 0:
-            print("Car stopped.")
-            stop_count = stop_count + 1
-        else:
-            print("The car is already stopped.")
-    elif command == "help":
-        print("""
-start - to start the car.
-stop - to stop the car.
-quit - to quit.
-        """)
-    elif command == "quit":
-        break
-    else:
-        print("Please enter 'help' for assitance.")
+# # car game
+# start_count = 0
+# stop_count = 0
+# while True:
+#     command = input("Enter the command : ").lower()
+#     if command == "start":
+#         if start_count == 0:
+#             print("Car started. Get ready.")
+#             start_count = start_count + 1
+#         else:
+#             print("The car is already started.")
+#     elif command == "stop":
+#         if stop_count == 0:
+#             print("Car stopped.")
+#             stop_count = stop_count + 1
+#         else:
+#             print("The car is already stopped.")
+#     elif command == "help":
+#         print("""
+# start - to start the car.
+# stop - to stop the car.
+# quit - to quit.
+#         """)
+#     elif command == "quit":
+#         break
+#     else:
+#         print("Please enter 'help' for assitance.")
+
+# to find the largest in list
+list_numbers = [5, 4, 6, 9, 1]
+max_num = 0
+for x in list_numbers:
+    if x > max_num:
+        max_num = x
+print(max_num)
