@@ -1,6 +1,6 @@
 import math
 import random
-import my
+import _mysql_connector
 
 # # defining a class
 # class My_Class:
@@ -122,9 +122,39 @@ import my
 #         print("Please enter 'help' for assitance.")
 
 # to find the largest in list
-list_numbers = [5, 4, 6, 9, 1]
-max_num = 0
-for x in list_numbers:
-    if x > max_num:
-        max_num = x
-print(max_num)
+# list_numbers = [5, 4, 6, 9, 1]
+# max_num = 0
+# for x in list_numbers:
+#     if x > max_num:
+#         max_num = x
+# print(max_num)
+
+# def add(a, b):
+#     return a+b
+
+# a=int(input("enter number : "))
+# b=int(input("enter number : "))
+# sum = add(a, b)
+# print(sum)
+
+# def greet():
+#     name=input("Enter your name : ")
+#     return f"Good Mornning {name}"
+
+# greet1=greet()
+# print(greet1)
+
+# def area_of_recatangle(l, b):
+#     return l*b
+
+# l=int(input("Enter the lenght : "))
+# b=int(input("Entr the width : "))
+# area = area_of_recatangle(l, b)
+# print("Area of the rectangle :", area)
+
+# recursive function
+def sum(n):
+    if n == 1:
+        return 1
+    return n + sum(n-1)
+print(sum(5))
