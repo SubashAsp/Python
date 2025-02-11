@@ -1,6 +1,6 @@
 import math
 import random
-import _mysql_connector
+# import _mysql_connector
 
 # # defining a class
 # class My_Class:
