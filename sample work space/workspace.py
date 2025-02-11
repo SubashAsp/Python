@@ -161,3 +161,19 @@ import _mysql_connector
 #     return n + sum(n-1)
 # print(sum(5))
 
+
+# # enumerate
+# names = ['subash', 'karthi', 'logu']
+# for index, name in enumerate(names, start=3):
+#     print(index, name)
+
+# # zip
+# list1 = [1, 2, 3]
+# list2 = ['a', 'b', 'c']
+# result = list(zip(list1, list2))
+# print(result)
+
+# unziping
+zipped = [(1, 'a'), (2, 'b'), (3, 'c')]
+unzipped = list(zip(*zipped))
+print(unzipped)
