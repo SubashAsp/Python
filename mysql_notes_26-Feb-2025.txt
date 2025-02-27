@@ -1,0 +1,2060 @@
+aslplap1313@aslplap1313:~$ mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.41-0ubuntu0.24.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| office             |
+| performance_schema |
+| sample             |
+| sample_db          |
+| sys                |
+| ticket_booking     |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> USE sample;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++----------------------------+
+| Tables_in_sample           |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| polls_book                 |
+| polls_college              |
+| polls_movies               |
+| polls_product              |
+| polls_school               |
+| polls_singer               |
+| polls_song                 |
++----------------------------+
+17 rows in set (0.00 sec)
+
+mysql> USE office;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_office |
++------------------+
+| employee         |
++------------------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM employee;
++----+---------+--------+-------------+---------------------+----------+
+| id | name    | emp_id | branch      | mail_id             | salary   |
++----+---------+--------+-------------+---------------------+----------+
+|  1 | Subash  |    558 | Chennai     | subash@gmail.com    | 25000.00 |
+|  2 | Karthi  |    557 | Chennai     | karthi@gmail.com    | 25000.00 |
+|  3 | Deepan  |    556 | Chennai     | deepan@gmail.com    | 25000.00 |
+|  4 | Suganth |    555 | Head Office | suganth@gmail.com   | 25000.00 |
+|  6 | Kumaran |    553 | Bangalore   | kumaranck@gmail.com | 25000.00 |
+|  7 | Logu    |    500 | Head Office | logu@gmail.com      | 35000.00 |
++----+---------+--------+-------------+---------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> create table new_emp_db;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table new_emp_db (
+    -> Emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    -> Ename VARCHAR(100),
+    -> JobDesc VARCHAR(100),
+    -> Salary INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> 
+Display all 774 possibilities? (y or n) 
+mysql> SHOW TABLES;
++------------------+
+| Tables_in_office |
++------------------+
+| employee         |
+| new_emp_db       |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE new_emp_db;
++---------+--------------+------+-----+---------+----------------+
+| Field   | Type         | Null | Key | Default | Extra          |
++---------+--------------+------+-----+---------+----------------+
+| Emp_id  | int          | NO   | PRI | NULL    | auto_increment |
+| Ename   | varchar(100) | YES  |     | NULL    |                |
+| JobDesc | varchar(100) | YES  |     | NULL    |                |
+| Salary  | int          | YES  |     | NULL    |                |
++---------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO new_emp_db
+    -> VALUES (1, "Akash", "Trainee", 15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM new_emp_id;
+ERROR 1146 (42S02): Table 'office.new_emp_id' doesn't exist
+mysql> SELECT * FROM new_emp_db;
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      1 | Akash | Trainee |  15000 |
++--------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO new_emp_db VALUES (1, "Akash", "Trainee", 15000)
+    -> ;
+ERROR 1062 (23000): Duplicate entry '1' for key 'new_emp_db.PRIMARY'
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary)
+    -> values ("Ram", "Trainee", 15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Karthi", "Developer", 25000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Deepan", "Sales", 25000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Suganth", "Retail", 25000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Ramya", "Engineer", 25000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> SELECT * FROM new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
++--------+---------+-----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("John", "ADMIN", 200000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Akshay", "MANAGER", 200000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Abdul", "HR", 150000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Meena", "HR", 100000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT * FROM new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
++--------+---------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Kumaran", "Sales", 40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO new_emp_db(Ename, JobDesc, Salary) values ("Logu", "Retail", 40000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM new_emp_db
+    -> WHERE Ename = "Subash";
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Ename = "Akash";
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      1 | Akash | Trainee |  15000 |
++--------+-------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Ename <> "Akash";
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Salary > 100000;
++--------+--------+---------+--------+
+| Emp_id | Ename  | JobDesc | Salary |
++--------+--------+---------+--------+
+|      7 | John   | ADMIN   | 200000 |
+|      8 | Akshay | MANAGER | 200000 |
+|      9 | Abdul  | HR      | 150000 |
++--------+--------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Salary > 100000 AND JobDesc = "MANAGER";
++--------+--------+---------+--------+
+| Emp_id | Ename  | JobDesc | Salary |
++--------+--------+---------+--------+
+|      8 | Akshay | MANAGER | 200000 |
++--------+--------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Salary > 100000 AND JobDesc = "MANAGER";
+mysql> SELECT * FROM new_emp_db WHERE JobDesc = "SALES";
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      4 | Deepan  | Sales   |  25000 |
+|     11 | Kumaran | Sales   |  40000 |
++--------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM NEW_EMP_ID WHERE JobDesc = "SALES";
+ERROR 1146 (42S02): Table 'office.NEW_EMP_ID' doesn't exist
+mysql> SELECT * FROM new_emp_db WHERE JobDesc = "SALES";
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      4 | Deepan  | Sales   |  25000 |
+|     11 | Kumaran | Sales   |  40000 |
++--------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE BINARY JobDesc = "SALES";
+Empty set, 1 warning (0.00 sec)
+
+mysql> SELECT * FROM NEW_EMP_ID WHERE JobDesc = "SALES" OR JobDesc = "HR";
+ERROR 1146 (42S02): Table 'office.NEW_EMP_ID' doesn't exist
+mysql> SELECT * FROM new_emp_db WHERE BINARY JobDesc = "SALES" OR JobDesc = "HR";
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      9 | Abdul | HR      | 150000 |
+|     10 | Meena | HR      | 100000 |
++--------+-------+---------+--------+
+2 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE JobDesc = "SALES" OR JobDesc = "HR";
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      4 | Deepan  | Sales   |  25000 |
+|      9 | Abdul   | HR      | 150000 |
+|     10 | Meena   | HR      | 100000 |
+|     11 | Kumaran | Sales   |  40000 |
++--------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE JobDesc = "SALES" OR JobDesc = "HR";
+mysql> SELECT * FROM new_emp_db WHERE JobDesc = "SALES" OR JobDesc = "HR" ORDER BY Ename;
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      9 | Abdul   | HR      | 150000 |
+|      4 | Deepan  | Sales   |  25000 |
+|     11 | Kumaran | Sales   |  40000 |
+|     10 | Meena   | HR      | 100000 |
++--------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE JobDesc IN ("HR", "Sales");
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      4 | Deepan  | Sales   |  25000 |
+|      9 | Abdul   | HR      | 150000 |
+|     10 | Meena   | HR      | 100000 |
+|     11 | Kumaran | Sales   |  40000 |
++--------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE JobDesc NOT IN ("Trainee");
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE JobDesc NOT IN ("Trainee") ORDER BY JobDesc;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      7 | John    | ADMIN     | 200000 |
+|      3 | Karthi  | Developer |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      5 | Suganth | Retail    |  25000 |
+|     12 | Logu    | Retail    |  40000 |
+|      4 | Deepan  | Sales     |  25000 |
+|     11 | Kumaran | Sales     |  40000 |
++--------+---------+-----------+--------+
+10 rows in set (0.00 sec)
+
+mysql> 
+mysql> SELECT * FROM new_emp_db WHERE Salary Between 10000 AND 40000;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM new_emp_db WHERE Salary Between 10000 AND 40000 ORDER BY Salary;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db
+    -> limmit 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '5' at line 2
+mysql> select * from new_emp_db limit 5;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
++--------+---------+-----------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db limit 5 where salary ;
+mysql> select * from new_emp_db limit 5 where salary >50000 order by JobDesc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary >50000 order by JobDesc' at line 1
+mysql> select * from new_emp_db limit 5 where salary > 50000 order by JobDesc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary > 50000 order by JobDesc' at line 1
+mysql> select * from new_emp_db limit 5 where salary > 50000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary > 50000' at line 1
+mysql> select * from new_emp_db limit 5 where salary >= 50000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary >= 50000' at line 1
+mysql> select * from new_emp_db where salary >= 50000 ;
++--------+--------+---------+--------+
+| Emp_id | Ename  | JobDesc | Salary |
++--------+--------+---------+--------+
+|      7 | John   | ADMIN   | 200000 |
+|      8 | Akshay | MANAGER | 200000 |
+|      9 | Abdul  | HR      | 150000 |
+|     10 | Meena  | HR      | 100000 |
++--------+--------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db limit 3 where salary >= 50000 ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where salary >= 50000' at line 1
+mysql> select * from new_emp_db where salary >= 50000 order by JobDesc;
++--------+--------+---------+--------+
+| Emp_id | Ename  | JobDesc | Salary |
++--------+--------+---------+--------+
+|      7 | John   | ADMIN   | 200000 |
+|      9 | Abdul  | HR      | 150000 |
+|     10 | Meena  | HR      | 100000 |
+|      8 | Akshay | MANAGER | 200000 |
++--------+--------+---------+--------+
+4 rows in set (0.01 sec)
+
+mysql> select * from new_emp_db where salary >= 50000 order by JobDesc limit 3;
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      7 | John  | ADMIN   | 200000 |
+|      9 | Abdul | HR      | 150000 |
+|     10 | Meena | HR      | 100000 |
++--------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where salary >= 50000 limit 3;
++--------+--------+---------+--------+
+| Emp_id | Ename  | JobDesc | Salary |
++--------+--------+---------+--------+
+|      7 | John   | ADMIN   | 200000 |
+|      8 | Akshay | MANAGER | 200000 |
+|      9 | Abdul  | HR      | 150000 |
++--------+--------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where salary >= 50000 limit 2 offset 2;
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      9 | Abdul | HR      | 150000 |
+|     10 | Meena | HR      | 100000 |
++--------+-------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where salary is null;
+Empty set (0.01 sec)
+
+mysql> select * from new_emp_db where salary is not null;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Trainee   |  15000 |
+|      2 | Ram     | Trainee   |  15000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.01 sec)
+
+mysql> select * from new_emp_db where Ename like "S%";
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|      5 | Suganth | Retail  |  25000 |
++--------+---------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "_a%";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      2 | Ram    | Trainee   |  15000 |
+|      3 | Karthi | Developer |  25000 |
+|      6 | Ramya  | Engineer  |  25000 |
++--------+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "______";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
+|      4 | Deepan | Sales     |  25000 |
+|      8 | Akshay | MANAGER   | 200000 |
++--------+--------+-----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "__r%";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select * from new_emp_db where Ename like "%ar%";
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      3 | Karthi  | Developer |  25000 |
+|     11 | Kumaran | Sales     |  40000 |
++--------+---------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "%ara%";
++--------+---------+---------+--------+
+| Emp_id | Ename   | JobDesc | Salary |
++--------+---------+---------+--------+
+|     11 | Kumaran | Sales   |  40000 |
++--------+---------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "%ra%";
++--------+---------+----------+--------+
+| Emp_id | Ename   | JobDesc  | Salary |
++--------+---------+----------+--------+
+|      2 | Ram     | Trainee  |  15000 |
+|      6 | Ramya   | Engineer |  25000 |
+|     11 | Kumaran | Sales    |  40000 |
++--------+---------+----------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "k%i";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from new_emp_db where Ename like "K%i";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from new_emp_db where binary Ename like "s%";
+Empty set, 1 warning (0.00 sec)
+
+mysql> 
+mysql> select * from new_emp_db where binary upper(ename) = upper("karthi");
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from new_emp_db where binary ename = upper("karthi");
+Empty set, 1 warning (0.01 sec)
+
+mysql> select * from new_emp_db where binary lower(ename) = "karthi";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select * from new_emp_db where ename = "karthi";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from lower(new_emp_db) where ename = "karthi";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(new_emp_db) where ename = "karthi"' at line 1
+mysql> select * from new_emp_db where ename = "karthi";
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      3 | Karthi | Developer |  25000 |
++--------+--------+-----------+--------+
+1 row in set (0.00 sec)
+
+mysql> show tables
+    -> ;
++------------------+
+| Tables_in_office |
++------------------+
+| employee         |
+| new_emp_db       |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> update new_emp_db set jobdesc="Developement" where jobdesc = "trainee";
+Query OK, 2 rows affected (0.02 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from new_emp_db;
++--------+---------+--------------+--------+
+| Emp_id | Ename   | JobDesc      | Salary |
++--------+---------+--------------+--------+
+|      1 | Akash   | Developement |  15000 |
+|      2 | Ram     | Developement |  15000 |
+|      3 | Karthi  | Developer    |  25000 |
+|      4 | Deepan  | Sales        |  25000 |
+|      5 | Suganth | Retail       |  25000 |
+|      6 | Ramya   | Engineer     |  25000 |
+|      7 | John    | ADMIN        | 200000 |
+|      8 | Akshay  | MANAGER      | 200000 |
+|      9 | Abdul   | HR           | 150000 |
+|     10 | Meena   | HR           | 100000 |
+|     11 | Kumaran | Sales        |  40000 |
+|     12 | Logu    | Retail       |  40000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> update new_emp_db set jobdesc="Developement", salary=25000 where jobdesc = "trainee";
+mysql> update new_emp_db set jobdesc="Developement", salary=25000 where jobdesc = "trainee";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from new_emp_db;
++--------+---------+--------------+--------+
+| Emp_id | Ename   | JobDesc      | Salary |
++--------+---------+--------------+--------+
+|      1 | Akash   | Developement |  15000 |
+|      2 | Ram     | Developement |  15000 |
+|      3 | Karthi  | Developer    |  25000 |
+|      4 | Deepan  | Sales        |  25000 |
+|      5 | Suganth | Retail       |  25000 |
+|      6 | Ramya   | Engineer     |  25000 |
+|      7 | John    | ADMIN        | 200000 |
+|      8 | Akshay  | MANAGER      | 200000 |
+|      9 | Abdul   | HR           | 150000 |
+|     10 | Meena   | HR           | 100000 |
+|     11 | Kumaran | Sales        |  40000 |
+|     12 | Logu    | Retail       |  40000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> update new_emp_db set jobdesc="Developer, "salary=25000 where jobdesc = "developement";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary=25000 where jobdesc = "developement"' at line 1
+mysql> update new_emp_db set jobdesc="Developer, "salary=25000 where jobdesc = "Developement";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'salary=25000 where jobdesc = "Developement"' at line 1
+mysql> update new_emp_db set jobdesc="Developer", salary=25000 where jobdesc = "Developement";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Developer |  25000 |
+|      2 | Ram     | Developer |  25000 |
+|      3 | Karthi  | Developer |  25000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> update new_emp_db set salary=35000 where jobdesc = "Developement";
+mysql> update new_emp_db set salary=35000 where ename = "karthi";
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Developer |  25000 |
+|      2 | Ram     | Developer |  25000 |
+|      3 | Karthi  | Developer |  35000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where is_active is true;
+ERROR 1054 (42S22): Unknown column 'is_active' in 'where clause'
+mysql> select * from new_emp_db where salary is true;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Developer |  25000 |
+|      2 | Ram     | Developer |  25000 |
+|      3 | Karthi  | Developer |  35000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.01 sec)
+
+mysql> select * from new_emp_db where salary is 25000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000' at line 1
+mysql> select * from new_emp_db where salary is 25000.00;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '25000.00' at line 1
+mysql> select distinct jobdesc from new_emp_db;
++-----------+
+| jobdesc   |
++-----------+
+| Developer |
+| Sales     |
+| Retail    |
+| Engineer  |
+| ADMIN     |
+| MANAGER   |
+| HR        |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> select distinct jobdesc, salary from new_emp_db;
++-----------+--------+
+| jobdesc   | salary |
++-----------+--------+
+| Developer |  25000 |
+| Developer |  35000 |
+| Sales     |  25000 |
+| Retail    |  25000 |
+| Engineer  |  25000 |
+| ADMIN     | 200000 |
+| MANAGER   | 200000 |
+| HR        | 150000 |
+| HR        | 100000 |
+| Sales     |  40000 |
+| Retail    |  40000 |
++-----------+--------+
+11 rows in set (0.00 sec)
+
+mysql> select distinct salary from new_emp_db;
++--------+
+| salary |
++--------+
+|  25000 |
+|  35000 |
+| 200000 |
+| 150000 |
+| 100000 |
+|  40000 |
++--------+
+6 rows in set (0.00 sec)
+
+mysql> select count(distinct salary) from new_emp_db;
++------------------------+
+| count(distinct salary) |
++------------------------+
+|                      6 |
++------------------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select distinct jobdesc from new_emp_db order by jobdesc;
++-----------+
+| jobdesc   |
++-----------+
+| ADMIN     |
+| Developer |
+| Engineer  |
+| HR        |
+| MANAGER   |
+| Retail    |
+| Sales     |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> select distinct jobdesc from new_emp_db order by jobdesc asc;
++-----------+
+| jobdesc   |
++-----------+
+| ADMIN     |
+| Developer |
+| Engineer  |
+| HR        |
+| MANAGER   |
+| Retail    |
+| Sales     |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> select distinct jobdesc from new_emp_db order by jobdesc desc;
++-----------+
+| jobdesc   |
++-----------+
+| Sales     |
+| Retail    |
+| MANAGER   |
+| HR        |
+| Engineer  |
+| Developer |
+| ADMIN     |
++-----------+
+7 rows in set (0.00 sec)
+
+mysql> 
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| office             |
+| performance_schema |
+| sample             |
+| sample_db          |
+| sys                |
+| ticket_booking     |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use office;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_office |
++------------------+
+| employee         |
+| new_emp_db       |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db order by ename
+    -> ;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      9 | Abdul   | HR        | 150000 |
+|      1 | Akash   | Developer |  25000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      3 | Karthi  | Developer |  35000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
+|     10 | Meena   | HR        | 100000 |
+|      2 | Ram     | Developer |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      5 | Suganth | Retail    |  25000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db order by ename, salary;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      9 | Abdul   | HR        | 150000 |
+|      1 | Akash   | Developer |  25000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      3 | Karthi  | Developer |  35000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
+|     10 | Meena   | HR        | 100000 |
+|      2 | Ram     | Developer |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      5 | Suganth | Retail    |  25000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where jobdesc='hr' order by ename;
++--------+-------+---------+--------+
+| Emp_id | Ename | JobDesc | Salary |
++--------+-------+---------+--------+
+|      9 | Abdul | HR      | 150000 |
+|     10 | Meena | HR      | 100000 |
++--------+-------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from new_emp_db where job_desc='hr' order by ename;
+ERROR 1054 (42S22): Unknown column 'job_desc' in 'where clause'
+mysql> select count(*) from new_emp_db;
++----------+
+| count(*) |
++----------+
+|       12 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)total from new_emp_db;
++-------+
+| total |
++-------+
+|    12 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)number of rows from new_emp_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'of rows from new_emp_db' at line 1
+mysql> select count(*)number_of_rows from new_emp_db;
++----------------+
+| number_of_rows |
++----------------+
+|             12 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)number of rows from new_emp_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'of rows from new_emp_db' at line 1
+mysql> select count(*)number_of_rows from new_emp_db;
++----------------+
+| number_of_rows |
++----------------+
+|             12 |
++----------------+
+1 row in set (0.01 sec)
+
+mysql> select count(*)number_of_managers from new_emp_db where jobdesc='manager';
++--------------------+
+| number_of_managers |
++--------------------+
+|                  1 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from new_emp_db;
++--------+---------+-----------+--------+
+| Emp_id | Ename   | JobDesc   | Salary |
++--------+---------+-----------+--------+
+|      1 | Akash   | Developer |  25000 |
+|      2 | Ram     | Developer |  25000 |
+|      3 | Karthi  | Developer |  35000 |
+|      4 | Deepan  | Sales     |  25000 |
+|      5 | Suganth | Retail    |  25000 |
+|      6 | Ramya   | Engineer  |  25000 |
+|      7 | John    | ADMIN     | 200000 |
+|      8 | Akshay  | MANAGER   | 200000 |
+|      9 | Abdul   | HR        | 150000 |
+|     10 | Meena   | HR        | 100000 |
+|     11 | Kumaran | Sales     |  40000 |
+|     12 | Logu    | Retail    |  40000 |
++--------+---------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select count(*)number_of_developer from new_emp_db where jobdesc='developer';
++---------------------+
+| number_of_developer |
++---------------------+
+|                   3 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*)number_of_developers from new_emp_db where jobdesc='developer';
++----------------------+
+| number_of_developers |
++----------------------+
+|                    3 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select ename, salary from new_emp_db;
++---------+--------+
+| ename   | salary |
++---------+--------+
+| Akash   |  25000 |
+| Ram     |  25000 |
+| Karthi  |  35000 |
+| Deepan  |  25000 |
+| Suganth |  25000 |
+| Ramya   |  25000 |
+| John    | 200000 |
+| Akshay  | 200000 |
+| Abdul   | 150000 |
+| Meena   | 100000 |
+| Kumaran |  40000 |
+| Logu    |  40000 |
++---------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select upper(ename), salary from new_emp_db;
++--------------+--------+
+| upper(ename) | salary |
++--------------+--------+
+| AKASH        |  25000 |
+| RAM          |  25000 |
+| KARTHI       |  35000 |
+| DEEPAN       |  25000 |
+| SUGANTH      |  25000 |
+| RAMYA        |  25000 |
+| JOHN         | 200000 |
+| AKSHAY       | 200000 |
+| ABDUL        | 150000 |
+| MEENA        | 100000 |
+| KUMARAN      |  40000 |
+| LOGU         |  40000 |
++--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select upper(ename)emp_name, salary from new_emp_db;
++----------+--------+
+| emp_name | salary |
++----------+--------+
+| AKASH    |  25000 |
+| RAM      |  25000 |
+| KARTHI   |  35000 |
+| DEEPAN   |  25000 |
+| SUGANTH  |  25000 |
+| RAMYA    |  25000 |
+| JOHN     | 200000 |
+| AKSHAY   | 200000 |
+| ABDUL    | 150000 |
+| MEENA    | 100000 |
+| KUMARAN  |  40000 |
+| LOGU     |  40000 |
++----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> 
+mysql> select ename,char_length(ename)
+    -> from new_emp_db;
++---------+--------------------+
+| ename   | char_length(ename) |
++---------+--------------------+
+| Akash   |                  5 |
+| Ram     |                  3 |
+| Karthi  |                  6 |
+| Deepan  |                  6 |
+| Suganth |                  7 |
+| Ramya   |                  5 |
+| John    |                  4 |
+| Akshay  |                  6 |
+| Abdul   |                  5 |
+| Meena   |                  5 |
+| Kumaran |                  7 |
+| Logu    |                  4 |
++---------+--------------------+
+12 rows in set (0.00 sec)
+
+mysql> select ename, concat('Rs.', salary) from new_emp_db;
++---------+-----------------------+
+| ename   | concat('Rs.', salary) |
++---------+-----------------------+
+| Akash   | Rs.25000              |
+| Ram     | Rs.25000              |
+| Karthi  | Rs.35000              |
+| Deepan  | Rs.25000              |
+| Suganth | Rs.25000              |
+| Ramya   | Rs.25000              |
+| John    | Rs.200000             |
+| Akshay  | Rs.200000             |
+| Abdul   | Rs.150000             |
+| Meena   | Rs.100000             |
+| Kumaran | Rs.40000              |
+| Logu    | Rs.40000              |
++---------+-----------------------+
+12 rows in set (0.00 sec)
+
+mysql> select ename, concat('Rs.', format(salary, 0)) from new_emp_db;
++---------+----------------------------------+
+| ename   | concat('Rs.', format(salary, 0)) |
++---------+----------------------------------+
+| Akash   | Rs.25,000                        |
+| Ram     | Rs.25,000                        |
+| Karthi  | Rs.35,000                        |
+| Deepan  | Rs.25,000                        |
+| Suganth | Rs.25,000                        |
+| Ramya   | Rs.25,000                        |
+| John    | Rs.200,000                       |
+| Akshay  | Rs.200,000                       |
+| Abdul   | Rs.150,000                       |
+| Meena   | Rs.100,000                       |
+| Kumaran | Rs.40,000                        |
+| Logu    | Rs.40,000                        |
++---------+----------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> 
+mysql> select sum(salary) from new_emp_db;
++-------------+
+| sum(salary) |
++-------------+
+|      890000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary) from new_emp_db where jobdesc='developer';
++-------------+
+| sum(salary) |
++-------------+
+|       85000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from new_emp_db where jobdesc='developer';
++-------------+
+| avg(salary) |
++-------------+
+|  28333.3333 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary) from new_emp_db;
++-------------+
+| avg(salary) |
++-------------+
+|  74166.6667 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from new_emp_db
+    -> ;
++----------+
+| count(*) |
++----------+
+|       12 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from new_emp_db wher
+mysql> select count(*) from new_emp_db where jobdesc='developer';
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(salary) from new_emp_db;
++-------------+
+| max(salary) |
++-------------+
+|      200000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select max(format(salary)) from new_emp_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')) from new_emp_db' at line 1
+mysql> select format(max(salary)) from new_emp_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') from new_emp_db' at line 1
+mysql> select max(*) from new_emp_db ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from new_emp_db' at line 1
+mysql> select max(*) from new_emp_db where salary='developer';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from new_emp_db where salary='developer'' at line 1
+mysql> select max(salary) from new_emp_db where salary='developer';
++-------------+
+| max(salary) |
++-------------+
+|        NULL |
++-------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> select max(*) from new_emp_db where salary='developer';
+
+
+
+
+mysql> select max(*) from new_emp_db where jobdesc='developer';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*) from new_emp_db where jobdesc='developer'' at line 1
+mysql> select max(salary) from new_emp_db where jobdesc='developer';
++-------------+
+| max(salary) |
++-------------+
+|       35000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from new_emp_db;
++-------------+
+| min(salary) |
++-------------+
+|       25000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select min(salary) from new_emp_db where jobdesc="developer";
++-------------+
+| min(salary) |
++-------------+
+|       25000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select group_concat(ename) from new_emp_db;
++----------------------------------------------------------------------------+
+| group_concat(ename)                                                        |
++----------------------------------------------------------------------------+
+| Akash,Ram,Karthi,Deepan,Suganth,Ramya,John,Akshay,Abdul,Meena,Kumaran,Logu |
++----------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select group_concat(ename) from new_emp_db where jobdesc='developer';
++---------------------+
+| group_concat(ename) |
++---------------------+
+| Akash,Ram,Karthi    |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select group_concat(ename)name from new_emp_db where jobdesc='developer';
++------------------+
+| name             |
++------------------+
+| Akash,Ram,Karthi |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select upper(ename) from new_emp_db;
++--------------+
+| upper(ename) |
++--------------+
+| AKASH        |
+| RAM          |
+| KARTHI       |
+| DEEPAN       |
+| SUGANTH      |
+| RAMYA        |
+| JOHN         |
+| AKSHAY       |
+| ABDUL        |
+| MEENA        |
+| KUMARAN      |
+| LOGU         |
++--------------+
+12 rows in set (0.00 sec)
+
+mysql> select lower(ename) from new_emp_db;
++--------------+
+| lower(ename) |
++--------------+
+| akash        |
+| ram          |
+| karthi       |
+| deepan       |
+| suganth      |
+| ramya        |
+| john         |
+| akshay       |
+| abdul        |
+| meena        |
+| kumaran      |
+| logu         |
++--------------+
+12 rows in set (0.00 sec)
+
+mysql> select concat('Asp ', ename) from new_emp_db;
++-----------------------+
+| concat('Asp ', ename) |
++-----------------------+
+| Asp Akash             |
+| Asp Ram               |
+| Asp Karthi            |
+| Asp Deepan            |
+| Asp Suganth           |
+| Asp Ramya             |
+| Asp John              |
+| Asp Akshay            |
+| Asp Abdul             |
+| Asp Meena             |
+| Asp Kumaran           |
+| Asp Logu              |
++-----------------------+
+12 rows in set (0.00 sec)
+
+mysql> select substring(ename, 1, 3) from new_emp_db;
++------------------------+
+| substring(ename, 1, 3) |
++------------------------+
+| Aka                    |
+| Ram                    |
+| Kar                    |
+| Dee                    |
+| Sug                    |
+| Ram                    |
+| Joh                    |
+| Aks                    |
+| Abd                    |
+| Mee                    |
+| Kum                    |
+| Log                    |
++------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select substring(ename, 3) from new_emp_db;
++---------------------+
+| substring(ename, 3) |
++---------------------+
+| ash                 |
+| m                   |
+| rthi                |
+| epan                |
+| ganth               |
+| mya                 |
+| hn                  |
+| shay                |
+| dul                 |
+| ena                 |
+| maran               |
+| gu                  |
++---------------------+
+12 rows in set (0.01 sec)
+
+mysql> select substring(ename, 2,  3) from new_emp_db;
++-------------------------+
+| substring(ename, 2,  3) |
++-------------------------+
+| kas                     |
+| am                      |
+| art                     |
+| eep                     |
+| uga                     |
+| amy                     |
+| ohn                     |
+| ksh                     |
+| bdu                     |
+| een                     |
+| uma                     |
+| ogu                     |
++-------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select trim('  Hello  ') as result;
++--------+
+| result |
++--------+
+| Hello  |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select trim('  Hello  ') result;
++--------+
+| result |
++--------+
+| Hello  |
++--------+
+1 row in set (0.00 sec)
+
+mysql> select ltrim('  Hello  ') result;
++---------+
+| result  |
++---------+
+| Hello   |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select rtrim('  Hello  ') result;
++---------+
+| result  |
++---------+
+|   Hello |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select trim(both x from 'xxxHelloxxx');
+ERROR 1054 (42S22): Unknown column 'x' in 'field list'
+mysql> select trim(both 'x' from 'xxxHelloxxx');
++-----------------------------------+
+| trim(both 'x' from 'xxxHelloxxx') |
++-----------------------------------+
+| Hello                             |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select trim(both 'x' from 'xxxHelloXXX');
++-----------------------------------+
+| trim(both 'x' from 'xxxHelloXXX') |
++-----------------------------------+
+| HelloXXX                          |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select trim(leading 'x' from 'xxxHelloxxx');
++--------------------------------------+
+| trim(leading 'x' from 'xxxHelloxxx') |
++--------------------------------------+
+| Helloxxx                             |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select trim(leading 'x' from 'xxxHelloxxx') as result;
++----------+
+| result   |
++----------+
+| Helloxxx |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select trim(trailing 'x' from 'xxxHelloxxx') as result;
++----------+
+| result   |
++----------+
+| xxxHello |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select trim(ename) from new_emp_db;
++-------------+
+| trim(ename) |
++-------------+
+| Akash       |
+| Ram         |
+| Karthi      |
+| Deepan      |
+| Suganth     |
+| Ramya       |
+| John        |
+| Akshay      |
+| Abdul       |
+| Meena       |
+| Kumaran     |
+| Logu        |
++-------------+
+12 rows in set (0.00 sec)
+
+mysql> update new_emp_db set ename = trim("Subash  ");
+Query OK, 12 rows affected (0.04 sec)
+Rows matched: 12  Changed: 12  Warnings: 0
+
+mysql> select * from new_emp_db;
++--------+--------+-----------+--------+
+| Emp_id | Ename  | JobDesc   | Salary |
++--------+--------+-----------+--------+
+|      1 | Subash | Developer |  25000 |
+|      2 | Subash | Developer |  25000 |
+|      3 | Subash | Developer |  35000 |
+|      4 | Subash | Sales     |  25000 |
+|      5 | Subash | Retail    |  25000 |
+|      6 | Subash | Engineer  |  25000 |
+|      7 | Subash | ADMIN     | 200000 |
+|      8 | Subash | MANAGER   | 200000 |
+|      9 | Subash | HR        | 150000 |
+|     10 | Subash | HR        | 100000 |
+|     11 | Subash | Sales     |  40000 |
+|     12 | Subash | Retail    |  40000 |
++--------+--------+-----------+--------+
+12 rows in set (0.00 sec)
+
+mysql> create table emp_id;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table emp_id(
+    -> emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(50),
+    -> jobdesc VARCHAR(50),
+    -> salary INT
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DESCRIBE emp_id ;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| emp_id  | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50) | YES  |     | NULL    |                |
+| jobdesc | varchar(50) | YES  |     | NULL    |                |
+| salary  | int         | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO emp_id 
+    -> VALUES(1, "Subash", "Trainee", 15000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Deepan", "Trainee", 15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Logu", "Trainee", 15000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Karthi", "Developer", 25000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Rishi", "Developer", 25000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Suganth", "Retail", 25000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Manoj", "Retail", 25000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Manoj", "Retail", 25000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from emp_id;
++--------+---------+-----------+--------+
+| emp_id | name    | jobdesc   | salary |
++--------+---------+-----------+--------+
+|      1 | Subash  | Trainee   |  15000 |
+|      2 | Deepan  | Trainee   |  15000 |
+|      3 | Logu    | Trainee   |  15000 |
+|      4 | Karthi  | Developer |  25000 |
+|      5 | Rishi   | Developer |  25000 |
+|      6 | Suganth | Retail    |  25000 |
+|      7 | Manoj   | Retail    |  25000 |
+|      8 | Manoj   | Retail    |  25000 |
++--------+---------+-----------+--------+
+8 rows in set (0.00 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("John", "Sr Developer", 50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Aby", "Sr Developer", 50000);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Daven", "Manager", 50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO emp_id(name, jobdesc, salary)  VALUES("Selvam", "Manager", 100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from emp_id;
++--------+---------+--------------+--------+
+| emp_id | name    | jobdesc      | salary |
++--------+---------+--------------+--------+
+|      1 | Subash  | Trainee      |  15000 |
+|      2 | Deepan  | Trainee      |  15000 |
+|      3 | Logu    | Trainee      |  15000 |
+|      4 | Karthi  | Developer    |  25000 |
+|      5 | Rishi   | Developer    |  25000 |
+|      6 | Suganth | Retail       |  25000 |
+|      7 | Manoj   | Retail       |  25000 |
+|      8 | Manoj   | Retail       |  25000 |
+|      9 | John    | Sr Developer |  50000 |
+|     10 | Aby     | Sr Developer |  50000 |
+|     11 | Daven   | Manager      |  50000 |
+|     12 | Selvam  | Manager      | 100000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> update emp_id set salary = 100000 where name = "daven";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp_id;
++--------+---------+--------------+--------+
+| emp_id | name    | jobdesc      | salary |
++--------+---------+--------------+--------+
+|      1 | Subash  | Trainee      |  15000 |
+|      2 | Deepan  | Trainee      |  15000 |
+|      3 | Logu    | Trainee      |  15000 |
+|      4 | Karthi  | Developer    |  25000 |
+|      5 | Rishi   | Developer    |  25000 |
+|      6 | Suganth | Retail       |  25000 |
+|      7 | Manoj   | Retail       |  25000 |
+|      8 | Manoj   | Retail       |  25000 |
+|      9 | John    | Sr Developer |  50000 |
+|     10 | Aby     | Sr Developer |  50000 |
+|     11 | Daven   | Manager      | 100000 |
+|     12 | Selvam  | Manager      | 100000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> update emp_id set name = "Rahul" where emp_id=8;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from emp_id;
++--------+---------+--------------+--------+
+| emp_id | name    | jobdesc      | salary |
++--------+---------+--------------+--------+
+|      1 | Subash  | Trainee      |  15000 |
+|      2 | Deepan  | Trainee      |  15000 |
+|      3 | Logu    | Trainee      |  15000 |
+|      4 | Karthi  | Developer    |  25000 |
+|      5 | Rishi   | Developer    |  25000 |
+|      6 | Suganth | Retail       |  25000 |
+|      7 | Manoj   | Retail       |  25000 |
+|      8 | Rahul   | Retail       |  25000 |
+|      9 | John    | Sr Developer |  50000 |
+|     10 | Aby     | Sr Developer |  50000 |
+|     11 | Daven   | Manager      | 100000 |
+|     12 | Selvam  | Manager      | 100000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select length(name) from emp_id ;
++--------------+
+| length(name) |
++--------------+
+|            6 |
+|            6 |
+|            4 |
+|            6 |
+|            5 |
+|            7 |
+|            5 |
+|            5 |
+|            4 |
+|            3 |
+|            5 |
+|            6 |
++--------------+
+12 rows in set (0.00 sec)
+
+mysql> select round(12.345, 2);
++------------------+
+| round(12.345, 2) |
++------------------+
+|            12.35 |
++------------------+
+1 row in set (0.00 sec)
+
+mysql> select round(12.345, 2)round;
++-------+
+| round |
++-------+
+| 12.35 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select ceil(12.3;)
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select ceil(12.3);
++------------+
+| ceil(12.3) |
++------------+
+|         13 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select floor(13.9);
++-------------+
+| floor(13.9) |
++-------------+
+|          13 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select abs(-7);
++---------+
+| abs(-7) |
++---------+
+|       7 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select mod(10, 3);
++------------+
+| mod(10, 3) |
++------------+
+|          1 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select power(2, 3);
++-------------+
+| power(2, 3) |
++-------------+
+|           8 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> power(2, 3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'power(2, 3)' at line 1
+mysql> select power(2, 3);
++-------------+
+| power(2, 3) |
++-------------+
+|           8 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-02-26 19:32:22 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-02-26 19:32:38 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-02-26 19:32:39 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select now();
++---------------------+
+| now()               |
++---------------------+
+| 2025-02-26 19:32:40 |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2025-02-26 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2025-02-26', '2001-09-03');
++--------------------------------------+
+| datediff('2025-02-26', '2001-09-03') |
++--------------------------------------+
+|                                 8577 |
++--------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2025-02-26', '2001-09-03')no_of_days_your_are_alive;
++---------------------------+
+| no_of_days_your_are_alive |
++---------------------------+
+|                      8577 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff('2002-07-31', '2025-02-26')no_of_days_your_are_alive;
++---------------------------+
+| no_of_days_your_are_alive |
++---------------------------+
+|                     -8246 |
++---------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_add(curdate(), interval 100);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select date_add(curdate(), interval 100 day);
++---------------------------------------+
+| date_add(curdate(), interval 100 day) |
++---------------------------------------+
+| 2025-06-06                            |
++---------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_add(curdate(), interval 100 day) as adding;
++------------+
+| adding     |
++------------+
+| 2025-06-06 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(), '%y, %m, %d, %h:%i:%s');
++------------------------------------------------+
+| date_format(curdate(), '%y, %m, %d, %h:%i:%s') |
++------------------------------------------------+
+| 25, 02, 26, 12:00:00                           |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(curdate(), '%y, %m, %d, %s:%i:%h');
++------------------------------------------------+
+| date_format(curdate(), '%y, %m, %d, %s:%i:%h') |
++------------------------------------------------+
+| 25, 02, 26, 00:00:12                           |
++------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2025-02-26 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(now(), '%y, %m, %d, %s:%i:%h');
++--------------------------------------------+
+| date_format(now(), '%y, %m, %d, %s:%i:%h') |
++--------------------------------------------+
+| 25, 02, 26, 17:45:08                       |
++--------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date_format(now(), '%y, %m, %d, %s:%i:%h');
++--------------------------------------------+
+| date_format(now(), '%y, %m, %d, %s:%i:%h') |
++--------------------------------------------+
+| 25, 02, 26, 25:45:08                       |
++--------------------------------------------+
+1 row in set (0.01 sec)
+
+mysql> select if(salary > 25000, 'High', 'Low') from emp_id ;
++-----------------------------------+
+| if(salary > 25000, 'High', 'Low') |
++-----------------------------------+
+| Low                               |
+| Low                               |
+| Low                               |
+| Low                               |
+| Low                               |
+| Low                               |
+| Low                               |
+| Low                               |
+| High                              |
+| High                              |
+| High                              |
+| High                              |
++-----------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select if(jobdesc='manager', 'Senior', 'Junior') from emp_id ;
++-------------------------------------------+
+| if(jobdesc='manager', 'Senior', 'Junior') |
++-------------------------------------------+
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Junior                                    |
+| Senior                                    |
+| Senior                                    |
++-------------------------------------------+
+12 rows in set (0.00 sec)
+
+mysql> select count(if(jobdesc='manager', 'Senior', 'Junior')) from emp_id ;
++--------------------------------------------------+
+| count(if(jobdesc='manager', 'Senior', 'Junior')) |
++--------------------------------------------------+
+|                                               12 |
++--------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select 
+    -> sum(if(jobdesc='manager', 1, 0)) Senior_count;
+ERROR 1054 (42S22): Unknown column 'jobdesc' in 'field list'
+mysql> select
+    -> sum(if(jobdesc='manager', 1, 0)) Senior_count;
+ERROR 1054 (42S22): Unknown column 'jobdesc' in 'field list'
+mysql> select sum(if(jobdesc='manager', 1, 0)) Senior_count from emp_id ;
++--------------+
+| Senior_count |
++--------------+
+|            2 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(if(jobdesc!='manager', 1, 0)) Junior_count from emp_id ;
++--------------+
+| Junior_count |
++--------------+
+|           10 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> 
+mysql> select name,
+    -> case
+    -> when salary > 25000 then 'high salary',
+    -> when salary between 25000 and 50000 then 'medium salary'
+    -> else 'Low Salary'
+    -> end as salarydetails
+    -> from emp_id ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+when salary between 25000 and 50000 then 'medium salary'
+else 'Low Salary'
+end' at line 3
+mysql> select * from emp_id;
++--------+---------+--------------+--------+
+| emp_id | name    | jobdesc      | salary |
++--------+---------+--------------+--------+
+|      1 | Subash  | Trainee      |  15000 |
+|      2 | Deepan  | Trainee      |  15000 |
+|      3 | Logu    | Trainee      |  15000 |
+|      4 | Karthi  | Developer    |  25000 |
+|      5 | Rishi   | Developer    |  25000 |
+|      6 | Suganth | Retail       |  25000 |
+|      7 | Manoj   | Retail       |  25000 |
+|      8 | Rahul   | Retail       |  25000 |
+|      9 | John    | Sr Developer |  50000 |
+|     10 | Aby     | Sr Developer |  50000 |
+|     11 | Daven   | Manager      | 100000 |
+|     12 | Selvam  | Manager      | 100000 |
++--------+---------+--------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select name, 
+    -> case
+    -> when salary > 50000 then "high salary"
+    -> when salary between 25000 and 50000 then 'medium salary'
+    -> else 'low salary'
+    -> end as salary_details
+    -> from emp_id;
++---------+----------------+
+| name    | salary_details |
++---------+----------------+
+| Subash  | low salary     |
+| Deepan  | low salary     |
+| Logu    | low salary     |
+| Karthi  | medium salary  |
+| Rishi   | medium salary  |
+| Suganth | medium salary  |
+| Manoj   | medium salary  |
+| Rahul   | medium salary  |
+| John    | medium salary  |
+| Aby     | medium salary  |
+| Daven   | high salary    |
+| Selvam  | high salary    |
++---------+----------------+
+12 rows in set (0.00 sec)
+
+mysql> select count()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select
+    -> count()
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 2
+mysql> select 
+    -> count(when jobdesc='manager' then 1 end)senior_count
+    -> count(when jobdesc!='manager'then 1 end)junior_count
+    -> from emp_id ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'when jobdesc='manager' then 1 end)senior_count
+count(when jobdesc!='manager'then' at line 2
+mysql> select  count(when jobdesc='manager' then 1 end)senior_count count(when jobdesc!='manager' then 1 end)junior_count from emp_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'when jobdesc='manager' then 1 end)senior_count count(when jobdesc!='manager' the' at line 1
+mysql> select  count(when jobdesc='manager' then 1 end)senior_count count(when jobdesc != 'manager' then 1 end)junior_count from emp_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'when jobdesc='manager' then 1 end)senior_count count(when jobdesc != 'manager' t' at line 1
+mysql> select 
+    -> count(case when jobdesc = 'manager' then 1 end)senior_count,
+    -> count(case when jobdesc != 'manager' then 1 end)junior_count
+    -> from emp_id ;
++--------------+--------------+
+| senior_count | junior_count |
++--------------+--------------+
+|            2 |           10 |
++--------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create table student(
+    -> id INT AUTO_INCREMENT PRIMARY KEY,
+    -> name VARCHAR(50),
+    -> depT_id INT
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DESCRIBE student;
++---------+-------------+------+-----+---------+----------------+
+| Field   | Type        | Null | Key | Default | Extra          |
++---------+-------------+------+-----+---------+----------------+
+| id      | int         | NO   | PRI | NULL    | auto_increment |
+| name    | varchar(50) | YES  |     | NULL    |                |
+| depT_id | int         | YES  |     | NULL    |                |
++---------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+
+mysql> INSERT INTO student 
+    -> VALUES (1, "Subash", 101);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO student()name, dept_id)
+    -> VALUES("Karthi", 102)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'name, dept_id)
+VALUES("Karthi", 102)' at line 1
+mysql> INSERT INTO student
+    -> VALUES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 2
+mysql> INSERT INTO student(name, dept_id)
+    -> VALUES("Karthi", 102);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from student;
++----+--------+---------+
+| id | name   | depT_id |
++----+--------+---------+
+|  1 | Subash |     101 |
+|  2 | Karthi |     102 |
++----+--------+---------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO student(name, dept_id) VALUES("Logu", 102);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO student(name, dept_id) VALUES("Deepan", 104);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from student;
++----+--------+---------+
+| id | name   | depT_id |
++----+--------+---------+
+|  1 | Subash |     101 |
+|  2 | Karthi |     102 |
+|  3 | Logu   |     102 |
+|  4 | Deepan |     104 |
++----+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update student set dept_id=103 where name='logu';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++----+--------+---------+
+| id | name   | depT_id |
++----+--------+---------+
+|  1 | Subash |     101 |
+|  2 | Karthi |     102 |
+|  3 | Logu   |     103 |
+|  4 | Deepan |     104 |
++----+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> 
+
