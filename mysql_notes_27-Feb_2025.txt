@@ -1,0 +1,285 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| office             |
+| performance_schema |
+| sample             |
+| sample_db          |
+| sys                |
+| ticket_booking     |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use office;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_office |
++------------------+
+| emp_id           |
+| employee         |
+| new_emp_db       |
+| student          |
++------------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student;
++----+--------+---------+
+| id | name   | depT_id |
++----+--------+---------+
+|  1 | Subash |     101 |
+|  2 | Karthi |     102 |
+|  3 | Logu   |     103 |
+|  4 | Deepan |     104 |
++----+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO student(name) VALUES("Suganth");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++----+---------+---------+
+| id | name    | depT_id |
++----+---------+---------+
+|  1 | Subash  |     101 |
+|  2 | Karthi  |     102 |
+|  3 | Logu    |     103 |
+|  4 | Deepan  |     104 |
+|  5 | Suganth |    NULL |
++----+---------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table department(
+    -> dept_id INT
+    -> dept_name
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dept_name
+)' at line 3
+mysql> create table department(
+    -> dept_id INT,
+    -> dept_name VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO department
+    -> VALUES(101, "Information Technology");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from department;
++---------+------------------------+
+| dept_id | dept_name              |
++---------+------------------------+
+|     101 | Information Technology |
++---------+------------------------+
+1 row in set (0.00 sec)
+
+mysql> INSERT INTO department VALUES(102, "Computer Science");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO department VALUES(103, "EEE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO department VALUES(104, "ECE");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO department VALUES(105, "CIVIL");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from department;
++---------+------------------------+
+| dept_id | dept_name              |
++---------+------------------------+
+|     101 | Information Technology |
+|     102 | Computer Science       |
+|     103 | EEE                    |
+|     104 | ECE                    |
+|     105 | CIVIL                  |
++---------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name
+    -> from student
+    -> join department on student.dept_id = department.dept_id;
++--------+------------------------+
+| name   | dept_name              |
++--------+------------------------+
+| Subash | Information Technology |
+| Karthi | Computer Science       |
+| Logu   | EEE                    |
+| Deepan | ECE                    |
++--------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select student.id, student.name, department.dept_name from student join department on student.dept_id = department.dept_id;
++----+--------+------------------------+
+| id | name   | dept_name              |
++----+--------+------------------------+
+|  1 | Subash | Information Technology |
+|  2 | Karthi | Computer Science       |
+|  3 | Logu   | EEE                    |
+|  4 | Deepan | ECE                    |
++----+--------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select student.id, student.name, department.dept_name from student inner join departmen
+t on student.dept_id = department.dept_id;
++----+--------+------------------------+
+| id | name   | dept_name              |
++----+--------+------------------------+
+|  1 | Subash | Information Technology |
+|  2 | Karthi | Computer Science       |
+|  3 | Logu   | EEE                    |
+|  4 | Deepan | ECE                    |
++----+--------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select student.id, student.name, department.dept_name from student left join department
+ on student.dept_id = department.dept_id;
++----+---------+------------------------+
+| id | name    | dept_name              |
++----+---------+------------------------+
+|  1 | Subash  | Information Technology |
+|  2 | Karthi  | Computer Science       |
+|  3 | Logu    | EEE                    |
+|  4 | Deepan  | ECE                    |
+|  5 | Suganth | NULL                   |
++----+---------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select student.id, student.name, department.dept_name from student right join departmen
+t on student.dept_id = department.dept_id;
++------+--------+------------------------+
+| id   | name   | dept_name              |
++------+--------+------------------------+
+|    1 | Subash | Information Technology |
+|    2 | Karthi | Computer Science       |
+|    3 | Logu   | EEE                    |
+|    4 | Deepan | ECE                    |
+| NULL | NULL   | CIVIL                  |
++------+--------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select student.id, student.name, department.dept_name from student right join department on student.dept_id = department.dept_id order by student.name;
++------+--------+------------------------+
+| id   | name   | dept_name              |
++------+--------+------------------------+
+| NULL | NULL   | CIVIL                  |
+|    4 | Deepan | ECE                    |
+|    2 | Karthi | Computer Science       |
+|    3 | Logu   | EEE                    |
+|    1 | Subash | Information Technology |
++------+--------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name from student cross join department;
++---------+------------------------+
+| name    | dept_name              |
++---------+------------------------+
+| Suganth | Information Technology |
+| Deepan  | Information Technology |
+| Logu    | Information Technology |
+| Karthi  | Information Technology |
+| Subash  | Information Technology |
+| Suganth | Computer Science       |
+| Deepan  | Computer Science       |
+| Logu    | Computer Science       |
+| Karthi  | Computer Science       |
+| Subash  | Computer Science       |
+| Suganth | EEE                    |
+| Deepan  | EEE                    |
+| Logu    | EEE                    |
+| Karthi  | EEE                    |
+| Subash  | EEE                    |
+| Suganth | ECE                    |
+| Deepan  | ECE                    |
+| Logu    | ECE                    |
+| Karthi  | ECE                    |
+| Subash  | ECE                    |
+| Suganth | CIVIL                  |
+| Deepan  | CIVIL                  |
+| Logu    | CIVIL                  |
+| Karthi  | CIVIL                  |
+| Subash  | CIVIL                  |
++---------+------------------------+
+25 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name
+    -> from student, department
+    -> where student.dept_id=department.dept_id;
++--------+------------------------+
+| name   | dept_name              |
++--------+------------------------+
+| Subash | Information Technology |
+| Karthi | Computer Science       |
+| Logu   | EEE                    |
+| Deepan | ECE                    |
++--------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name from student cross join department;
+
+mysql> select student.name, department.dept_name from student cross join department where student.dept_id = department.dept_id;
++--------+------------------------+
+| name   | dept_name              |
++--------+------------------------+
+| Subash | Information Technology |
+| Karthi | Computer Science       |
+| Logu   | EEE                    |
+| Deepan | ECE                    |
++--------+------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name
+    -> from student
+    -> left join department
+    -> on student.dept_id = department.dept_id;
++---------+------------------------+
+| name    | dept_name              |
++---------+------------------------+
+| Subash  | Information Technology |
+| Karthi  | Computer Science       |
+| Logu    | EEE                    |
+| Deepan  | ECE                    |
+| Suganth | NULL                   |
++---------+------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select student.name, department.dept_name
+    -> from student
+    -> left join department
+    -> on student.dept_id = department.dept_id
+    -> union 
+    -> select student
+    -> right join department
+    -> on student.dept_id = department.dept_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'right join department
+on student.dept_id = department.dept_id' at line 7
+mysql> select student.name, department.dept_name from student left join department on student.dept_id = department.dept_id union  select student right join department on student.dept_id =
+department.dept_id;
+
+mysql> select student.name, department.dept_name from student left join department on student.dept_id = department.dept_id union  select student.name, department.dept_name right join depar
+tment on student.dept_id = department.dept_id;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'right join department on student.dept_id = department.dept_id' at line 1
+mysql> select student.name, department.dept_name from student left join department on student.dept_id = department.dept_id union  select student.name, department.dept_name from student right join department on student.dept_id = department.dept_id;
++---------+------------------------+
+| name    | dept_name              |
++---------+------------------------+
+| Subash  | Information Technology |
+| Karthi  | Computer Science       |
+| Logu    | EEE                    |
+| Deepan  | ECE                    |
+| Suganth | NULL                   |
+| NULL    | CIVIL                  |
++---------+------------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student
+    -> union
+    -> select * from department;
+ERROR 1222 (21000): The used SELECT statements have a different number of columns
